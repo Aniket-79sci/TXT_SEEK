@@ -17,14 +17,7 @@
 
     let workerSrc = "https://unpkg.com/pdfjs-dist@5.0.375/build/pdf.worker.min.mjs";
 
-	let workerOptions = {
-		// workerPath:workerFile,
-		// // langPath:langData,
-		// corePath:coreData,
-		logger: (m) => console.log(m)
-		// gzip : false,
-		// workerBlobURL:false
-	};
+
 
 	let file_img;
 
@@ -44,7 +37,17 @@
     
 		console.log(images);
 		try {
-			const worker = await createWorker('eng', 1, workerOptions);
+			const worker = await createWorker('eng', 1, {
+				// workerPath:workerFile,
+				// // langPath:langData,
+				// corePath:coreData,
+				logger: (m) => {
+					console.log(m);
+					if(m.status = ""){}
+				}
+				// gzip : false,
+				// workerBlobURL:false
+			});
 			const { data } = await worker.recognize(
 				images,
 				{ pdfTitle: `part_${index}` },
@@ -172,6 +175,8 @@ console.log("error not above");
 
 	// initiator function calls most of the functions.
 	async function complete() {
+	file_img = document.querySelector("#picture").files
+	console.log(file_img);
     files_remaining_percentage = 0;
     files_remaining_percentage += 3;
 		let images = await convertPdfToImages(file_img[0]);
@@ -215,18 +220,19 @@ console.log("error not above");
 
 
 <div>
-	<div class="flex gap-3 items-center my-2 ml-2">
+	<div class="flex gap-3 items-end my-2 ml-2 w-full">
 
 		
 		<div class="grid w-full max-w-sm items-center gap-1.5">
 			<Label for="picture">Upload PDF</Label>
-			<Input id="picture" type="file" bind:files={file_img}/>
+			<Input id="picture" type="file" />
 		</div>
 		<Button on:click={complete}>Load</Button>
 		<!-- <Button class="btn" on:click={recognizeText}>recognize</Button>
 		<Button class="btn" on:click={downloadPdf}>Download PDF</Button> -->
-
-		<Progress value={files_remaining_percentage} max={100} class="w-[44%]"/>
+		<div class="py-4 pr-5 w-[90%]">
+			<Progress value={files_remaining_percentage} max={100} class=""></Progress>
+		</div>
 
 	</div>
 
