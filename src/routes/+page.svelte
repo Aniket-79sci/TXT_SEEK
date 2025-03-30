@@ -12,6 +12,9 @@
 
 	import PDFMerger from 'pdf-merger-js/browser';
 
+	import { Input } from "$lib/components/ui/input/index.js";
+  	import { Label } from "$lib/components/ui/label/index.js";
+
     let workerSrc = "https://unpkg.com/pdfjs-dist@5.0.375/build/pdf.worker.min.mjs";
 
 	let workerOptions = {
@@ -212,20 +215,18 @@ console.log("error not above");
 
 
 <div>
-	<div class="flex gap-3 items-center">
+	<div class="flex gap-3 items-center my-2 ml-2">
 
-		<input
-			type="file"
-			
-			name=""
-			bind:files={file_img}
-		/>
-
-		<Button on:click={complete}>Complete</Button>
+		
+		<div class="grid w-full max-w-sm items-center gap-1.5">
+			<Label for="picture">Upload PDF</Label>
+			<Input id="picture" type="file" bind:files={file_img}/>
+		</div>
+		<Button on:click={complete}>Load</Button>
 		<!-- <Button class="btn" on:click={recognizeText}>recognize</Button>
 		<Button class="btn" on:click={downloadPdf}>Download PDF</Button> -->
 
-		<Progress value={files_remaining_percentage} max={100} class="w-[30%]"/>
+		<Progress value={files_remaining_percentage} max={100} class="w-[44%]"/>
 
 	</div>
 
