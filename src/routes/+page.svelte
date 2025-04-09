@@ -220,16 +220,19 @@ console.log("error not above");
 
 
 <div>
-	<div class="flex gap-3 items-end my-2 ml-2 w-full">
+	<div class="flex flex-col items-center justify-center min-h-screen gap-4">
 
-		
-		<div class="grid w-full max-w-sm items-center gap-1.5">
-			<Label for="picture">Upload PDF</Label>
-			<Input id="picture" type="file" />
-		</div>
-		<Button on:click={complete}>Load</Button>
+		<!-- Upload section -->
+		<div class="flex flex-col md:flex-row gap-3 items-end">
+			<div class="grid w-full max-w-sm items-center gap-1.5">
+				<Label for="picture" class="text-3xl font-semibold text-center w-full mt-3 mb-3">Upload PDF Below</Label>
+				<Input id="picture" type="file" />
+			</div>
+			<Button on:click={complete}>Load</Button>
 		<!-- <Button class="btn" on:click={recognizeText}>recognize</Button>
 		<Button class="btn" on:click={downloadPdf}>Download PDF</Button> -->
+		</div>
+
 		<div class="py-4 pr-5 w-[90%]">
 			<Progress value={files_remaining_percentage} max={100} class=""></Progress>
 		</div>
